@@ -11,7 +11,7 @@ function Roots({ changeCell, cellContent }) {
         <div className="grid 0" onClick={changeCell}>{cellContent[0]}</div>
         <div className="grid 1" onClick={changeCell}>{cellContent[1]}</div>
         <div></div>
-        <div className="grid"></div>
+        <div className="grid 2" onClick={changeCell}>{cellContent[2]}</div>
         <div></div>
         <div className="grid"></div>
         <div className="grid"></div>
