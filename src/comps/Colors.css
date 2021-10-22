@@ -1,0 +1,29 @@
+.dragColors {
+    margin-left: 20px;
+    display: flex;
+}
+
+.base {
+    margin-bottom: 3px;
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.gray {
+    background-color: gray;
+}
+.indianred {
+    background-color: indianred;
+}
+.lightblue {
+    background-color: lightblue;
+}
+.lightgreen {
+    background-color: lightgreen;
+}
+.palegoldenrod {
+    background-color: palegoldenrod;
+}

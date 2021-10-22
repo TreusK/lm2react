@@ -1,0 +1,13 @@
+#annfwnMap {
+    display: grid;
+    grid-template-columns: repeat(7, 60px);
+    grid-template-rows: repeat(5, 30px);
+}
+
+.grid {
+    background-color: gray;
+    border: solid 1px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

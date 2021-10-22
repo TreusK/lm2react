@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Roots from './comps/maps/Roots';
+import Annfwn from './comps/maps/Annfwn';
+import {useState, setState} from 'react';
 
 function App() {
+  const [roots, setRoots] = useState(['', ''])
+
+  function changeCell(e) {
+    let rootsCopy = [...roots];
+    let cellIndex = +e.target.classList[1];
+    if(rootsCopy[cellIndex] == '') {
+      rootsCopy[cellIndex] = '1'
+    } else if(+rootsCopy[cellIndex] < 15) {
+      let valueAsInt = +rootsCopy[cellIndex];
+      valueAsInt++;
+      rootsCopy[cellIndex] = String(valueAsInt);
+    } else {
+      rootsCopy[cellIndex] = '';
+    }
+    setRoots(rootsCopy);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Header here maybe
+      <Roots changeCell={changeCell} cellContent={roots}/>
+      <Annfwn />
     </div>
   );
 }
