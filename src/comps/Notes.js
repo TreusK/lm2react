@@ -1,13 +1,12 @@
 import './Notes.css';
 
-function Notes() {
+function Notes({notes, changeNote, whichMapNotes}) {
     return (
         <div>
             <ul>
-                <li>test</li>
-                <li>toast</li>
+                {notes.map((note, index) => <li className={whichMapNotes + ' ' + index} onClick={(e) => changeNote(e)}>{note}</li>)}
             </ul>
-            <div>add thingy here</div> 
+            <div>+</div> 
         </div>
     );
 }

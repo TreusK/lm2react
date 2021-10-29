@@ -1,17 +1,21 @@
 import './App.css';
 import Roots from './comps/maps/Roots';
 import Annfwn from './comps/maps/Annfwn';
-import {useState, setState} from 'react';
+import {useState} from 'react';
 
 function App() {
-  const [roots, setRoots] = useState(['', '', '']);
-  const [annfwn, setAnnfwn] = useState(['', '']);
+  const [roots, setRoots] = useState(['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+  const [rootsNotes, setRootsNotes] = useState(['note 1', 'note 2', 'asdjhasjkdhj hajsdh jahsdjl alsdh jlahsdlj aljshdkjashdkj'])
+  const [annfwn, setAnnfwn] = useState(['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+  const [annfwnNotes, setAnnfwnNotes] = useState(['annnotes1', 'annnotes2', '3- boss here'])
+
+  const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
   //Function to change the cell content (number) on click
   function changeCell(e, nameOfMap, stateOfMap) {
     let mapCopy = [...stateOfMap];
     let cellIndex = +e.target.classList[1];
-    if(mapCopy[cellIndex] == '') {
+    if(mapCopy[cellIndex] === '') {
       mapCopy[cellIndex] = '1'
     } else if(+mapCopy[cellIndex] < 15) {
       let valueAsInt = +mapCopy[cellIndex];
@@ -37,11 +41,47 @@ function App() {
     }
   }
 
+  //Function to use a different setState for the notes depending on the map name
+  function dynamicNotesSetState(name, newNoteState) {
+    switch (name) {
+      case 'roots':
+        setRootsNotes(newNoteState);
+        break;
+      case 'annfwn':
+        setAnnfwnNotes(newNoteState);
+        break;
+      default:
+        break;
+    }
+  }
+
+  //Function to close text input when you press enter
+  function changeAndCloseInput(e) {
+    if(e.key === 'Enter') {
+      let whichMap = e.target.parentElement.classList[0];
+      let whichIndex = +e.target.parentElement.classList[1];
+      let newString = e.target.value;
+      
+    }
+  }
+
+  //Function to change notes when clicked
+  function changeNote(e) {
+    if(isAnotherInputOpen === false) {
+      setIsAnotherInputOpen(true);
+      let listItem = e.target;
+      let inputChild = document.createElement('input');
+      inputChild.value = listItem.textContent;
+      inputChild.onkeydown = changeAndCloseInput;
+      listItem.append(inputChild);
+    }
+  }
+
   return (
     <div>
       Header here maybe
-      <Roots changeCell={(e) => changeCell(e, 'roots', roots)} cellContent={roots}/>
-      <Annfwn changeCell={(e) => changeCell(e, 'annfwn', annfwn)} cellContent={annfwn}/>
+      <Roots changeCell={(e) => changeCell(e, 'roots', roots)} cellContent={roots} notes={rootsNotes} changeNote={changeNote}/>
+      <Annfwn changeCell={(e) => changeCell(e, 'annfwn', annfwn)} cellContent={annfwn} notes={annfwnNotes} changeNote={changeNote}/>
     </div>
   );
 }
