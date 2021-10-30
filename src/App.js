@@ -42,13 +42,21 @@ function App() {
   }
 
   //Function to use a different setState for the notes depending on the map name
-  function dynamicNotesSetState(name, newNoteState) {
+  function dynamicNotesSetState(name, index, newNote) {
     switch (name) {
       case 'roots':
-        setRootsNotes(newNoteState);
+        let rootsNotesCopy = [...rootsNotes];
+        if(newNote === '') {
+          rootsNotesCopy.splice(index, 1);
+        } else {
+          rootsNotesCopy[index] = newNote;
+        }
+        setRootsNotes(rootsNotesCopy);
         break;
       case 'annfwn':
-        setAnnfwnNotes(newNoteState);
+        let annfwnNotesCopy = [...annfwnNotes];
+        annfwnNotesCopy[index] = newNote;
+        setAnnfwnNotes(annfwnNotesCopy);
         break;
       default:
         break;
@@ -61,7 +69,9 @@ function App() {
       let whichMap = e.target.parentElement.classList[0];
       let whichIndex = +e.target.parentElement.classList[1];
       let newString = e.target.value;
-      
+      e.target.remove();
+      dynamicNotesSetState(whichMap, whichIndex, newString);
+      setIsAnotherInputOpen(false);
     }
   }
 
