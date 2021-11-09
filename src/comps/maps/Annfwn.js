@@ -1,7 +1,7 @@
 import './Annfwn.css';
 import Notes from '../Notes';
 
-function Annfwn({ changeCell, cellContent, notes, changeNote }) {
+function Annfwn({ changeCell, cellContent, notes, changeNote, addNewNote }) {
   return (
     <div>
       <h2>Annfwn</h2>
@@ -42,7 +42,7 @@ function Annfwn({ changeCell, cellContent, notes, changeNote }) {
             <div className="grid 24" onClick={changeCell}>{cellContent[24]}</div>
             <div></div>
         </div>
-        <Notes notes={notes} changeNote={changeNote} whichMapNotes='annfwn'/>
+        <Notes notes={notes} changeNote={changeNote} whichMapNotes='annfwn' addNewNote={addNewNote}/>
     </div>
   );
 }

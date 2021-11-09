@@ -1,7 +1,7 @@
 import './Roots.css';
 import Notes from '../Notes';
 
-function Roots({ changeCell, cellContent, notes, changeNote }) {
+function Roots({ changeCell, cellContent, notes, changeNote, addNewNote }) {
   return (
     <div>
       <h2>Roots of Yggdrasil</h2>
@@ -49,7 +49,7 @@ function Roots({ changeCell, cellContent, notes, changeNote }) {
         <div></div>
         <div></div>
       </div>
-      <Notes notes={notes} changeNote={changeNote} whichMapNotes='roots'/>
+      <Notes notes={notes} changeNote={changeNote} whichMapNotes='roots' addNewNote={addNewNote}/>
     </div>
   );
 }
