@@ -4,34 +4,11 @@ import Zone from './comps/Zone';
 //import Annfwn from './comps/maps/Annfwn';
 import {useReducer} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react';
 
 function App() {
-  /*
-  const [roots, setRoots] = useState(['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
-  const [rootsNotes, setRootsNotes] = useState(['1- Gate to La Mulana', 'note 2', 'asdjhasjkdhj '])
-  const [annfwn, setAnnfwn] = useState(['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
-  const [annfwnNotes, setAnnfwnNotes] = useState(['annnotes1', 'annnotes2', '3- boss here'])
 
-  const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
-  */
+  //const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
-  
-
-  //Function to use a different setState depending on the map name
-  /*
-  function dynamicSetState(name, newState) {
-    switch (name) {
-      case 'roots':
-        setRoots(newState);
-        break;
-      case 'annfwn':
-        setAnnfwn(newState);
-        break;
-      default:
-        break;
-    }
-  }*/
 
   //Function to use a different setState for the notes depending on the map name
   /*
@@ -101,6 +78,7 @@ function App() {
     initialState,
   );
 
+  //States of all maps
   const [roots, setRoots] = useLegacyState({
     zoneName: 'Roots of Yggdrasil',
     mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -114,28 +92,29 @@ function App() {
     notesContent: ['array of strings here'],
   });
 
-  //Function to change the cell content (number) on click
-  /*
-  function changeCell(e, nameOfMap, stateOfMap) {
-    let mapCopy = [...stateOfMap];
-    let cellIndex = +e.target.classList[1];
-    if(mapCopy[cellIndex] === '') {
-      mapCopy[cellIndex] = '1'
-    } else if(+mapCopy[cellIndex] < 15) {
-      let valueAsInt = +mapCopy[cellIndex];
-      valueAsInt++;
-      mapCopy[cellIndex] = String(valueAsInt);
-    } else {
-      mapCopy[cellIndex] = '';
-    }
-    dynamicSetState(nameOfMap, mapCopy);
-  }*/
-
+  //Map functions
+  //Change the value of the maps arrays on click, from 1 to 15
   function handleClickOnCell(e, setWhichState, whichZone) {
     let cellIndex = +e.target.classList[1];
     let newMapContent = [...whichZone.mapContent];
-    newMapContent[cellIndex] = '1';
+    if(newMapContent[cellIndex] === '') {
+      newMapContent[cellIndex] = '1';
+    } else if(+newMapContent[cellIndex] < 15) {
+      let valueAsInt = +newMapContent[cellIndex];
+      valueAsInt++;
+      newMapContent[cellIndex] = String(valueAsInt);
+    } else {
+      newMapContent[cellIndex] = '';
+    }
     setWhichState({mapContent: newMapContent});
+  }
+  
+  
+  
+  //Notes functions
+  //Add a new note when clicking the Add/Plus button
+  function handleAddNote(e) {
+    console.log(e.target);
   }
 
   return (
@@ -148,9 +127,6 @@ function App() {
 }
 
 export default App;
-
-//Map Component
-//<Map mapInfo={rootsTest} mapGrid={mapsGrid.rootsGrid}/>
 
 //Old map specific component
 //<Roots changeCell={(e) => changeCell(e, 'roots', roots)} cellContent={roots} notes={rootsNotes} changeNote={changeNote} addNewNote={addNewNote}/>
