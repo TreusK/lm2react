@@ -2,13 +2,10 @@ import './App.css';
 import Zone from './comps/Zone';
 //import Roots from './comps/maps/Roots';
 //import Annfwn from './comps/maps/Annfwn';
-import {useReducer} from 'react';
+import {useState, useReducer} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
 
 function App() {
-
-  //const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
-
 
   //Function to use a different setState for the notes depending on the map name
   /*
@@ -39,38 +36,6 @@ function App() {
     }
   }*/
 
-  //Function to close text input when you press enter
-  /*
-  function changeAndCloseInput(e) {
-    if(e.key === 'Enter') {
-      let whichMap = e.target.parentElement.classList[0];
-      let whichIndex = +e.target.parentElement.classList[1];
-      let newString = e.target.value;
-      e.target.remove();
-      dynamicNotesSetState(whichMap, whichIndex, newString);
-      setIsAnotherInputOpen(false);
-    }
-  }*/
-
-  //Function to change notes when clicked on them
-  /*
-  function changeNote(e) {
-    if(isAnotherInputOpen === false) {
-      setIsAnotherInputOpen(true);
-      let listItem = e.target;
-      let inputChild = document.createElement('input');
-      inputChild.value = listItem.textContent;
-      inputChild.onkeydown = changeAndCloseInput;
-      listItem.append(inputChild);
-    }
-  }*/
-
-  //Function to add new <li> item when the Add button is clicked
-  /*
-  function addNewNote(whichMapNotes) {
-    dynamicNotesSetState(whichMapNotes, 404, 'New Note');
-  }*/
-
   //////////////////////Testing Map component/////////////////////
   //Legacy state
   const useLegacyState = initialState => useReducer(
@@ -92,8 +57,11 @@ function App() {
     notesContent: ['array of strings here'],
   });
 
+  //State of the notes inputs, to have only one open
+  const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
+
   //Map functions
-  //Change the value of the maps arrays on click, from 1 to 15
+  //Change the value of the maps cells on click, from 1 to 15, back to empty
   function handleClickOnCell(e, setWhichState, whichZone) {
     let cellIndex = +e.target.classList[1];
     let newMapContent = [...whichZone.mapContent];
@@ -109,22 +77,43 @@ function App() {
     setWhichState({mapContent: newMapContent});
   }
   
-  
-  
   //Notes functions
-  //Add a new note when clicking the Add/Plus button
-  function handleAddNote(e) {
-    console.log(e.target);
+  //Function to change notes when clicked on them
+  function handleChangeNote(e, whichSetZone, whichZone) {
+    if(isAnotherInputOpen === false) {
+      setIsAnotherInputOpen(true);
+      let listItem = e.target;
+      let inputChild = document.createElement('input');
+      inputChild.value = listItem.textContent;
+      inputChild.onkeydown = (e) => changeAndCloseInput(e, whichSetZone, whichZone);
+      listItem.append(inputChild);
+    }
+  }
+
+  function changeAndCloseInput(e, whichSetZone, whichZone) {
+    if(e.key === 'Enter') {
+      let notesContentCopy = [...whichZone.notesContent];
+      let whichIndex = +e.target.parentElement.classList[0];
+      let newString = e.target.value;
+      if(newString === '') {
+        notesContentCopy.splice(whichIndex, 1);
+      } else {
+        notesContentCopy[whichIndex] = newString;
+      }
+      e.target.remove(); 
+      whichSetZone({notesContent: notesContentCopy});
+      setIsAnotherInputOpen(false);
+    }
   }
 
   return (
     <div>
       Header here maybe
-      <Zone zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} setWhichState={setRoots}/>
-      <Zone zone={annfwn} mapGrid={mapsGrid.annfwnGrid} cellClick={handleClickOnCell} setWhichState={setAnnfwn}/>
+      <Zone zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setRoots}/>
+      <Zone zone={annfwn} mapGrid={mapsGrid.annfwnGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAnnfwn}/>
     </div>
   );
-}
+};
 
 export default App;
 
