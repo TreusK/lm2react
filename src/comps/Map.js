@@ -6,6 +6,8 @@ import './Map.css';
     -cellClick, the event to change the state of the map
     -setWhichState, to know which state to change*/
 function Map({zone, mapGrid, cellClick, setWhichState}) {
+    
+    //Start a counter to dynamically add classes to each cell
     let counter = -1;
     //Makes a grid of X colums and Y rows, depending on the map
     let columns = zone.mapGrid[0];

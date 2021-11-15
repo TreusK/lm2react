@@ -2,41 +2,11 @@ import './App.css';
 import Zone from './comps/Zone';
 //import Roots from './comps/maps/Roots';
 //import Annfwn from './comps/maps/Annfwn';
-import {useState, useReducer} from 'react';
+import {useState, useReducer, useEffect} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
 
 function App() {
 
-  //Function to use a different setState for the notes depending on the map name
-  /*
-  function dynamicNotesSetState(name, index, newNote) {
-    switch (name) {
-      case 'roots':
-        let rootsNotesCopy = [...rootsNotes];
-        if(newNote === '') {
-          rootsNotesCopy.splice(index, 1);
-        } else if(newNote === 'New Note'){
-          rootsNotesCopy.push(newNote);
-        } else {
-          rootsNotesCopy[index] = newNote;
-        }
-        setRootsNotes(rootsNotesCopy);
-        break;
-      case 'annfwn':
-        let annfwnNotesCopy = [...annfwnNotes];
-        if(newNote === '') {
-          annfwnNotesCopy.splice(index, 1);
-        } else {
-          annfwnNotesCopy[index] = newNote;
-        }
-        setAnnfwnNotes(annfwnNotesCopy);
-        break;
-      default:
-        break;
-    }
-  }*/
-
-  //////////////////////Testing Map component/////////////////////
   //Legacy state
   const useLegacyState = initialState => useReducer(
     (state, update) => ({ ...state, ...update }),
@@ -44,18 +14,22 @@ function App() {
   );
 
   //States of all maps
-  const [roots, setRoots] = useLegacyState({
+  const [roots, setRoots] = useLegacyState(JSON.parse(localStorage.getItem('Roots of Yggdrasil')) || {
     zoneName: 'Roots of Yggdrasil',
     mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
     mapGrid: [7, 6],
-    notesContent: ['blablabla', 'blobloblo'],
+    notesContent: ['Click me to edit, or click the + button to add new notes'],
   });
-  const [annfwn, setAnnfwn] = useLegacyState({
+  const [annfwn, setAnnfwn] = useLegacyState(JSON.parse(localStorage.getItem('Annfwn')) || {
     zoneName: 'Annfwn',
     mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
     mapGrid: [7, 5],
-    notesContent: ['array of strings here'],
+    notesContent: [],
   });
+
+  useEffect(() => {
+    console.log(localStorage);
+  })
 
   //State of the notes inputs, to have only one open
   const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
@@ -90,6 +64,7 @@ function App() {
     }
   }
 
+  //Event for the input that appears when editing a note
   function changeAndCloseInput(e, whichSetZone, whichZone) {
     if(e.key === 'Enter') {
       let notesContentCopy = [...whichZone.notesContent];
@@ -117,5 +92,3 @@ function App() {
 
 export default App;
 
-//Old map specific component
-//<Roots changeCell={(e) => changeCell(e, 'roots', roots)} cellContent={roots} notes={rootsNotes} changeNote={changeNote} addNewNote={addNewNote}/>

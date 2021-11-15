@@ -3,6 +3,7 @@ import './Zone.css';
 //Components
 import Map from './Map';
 import Notes from './Notes';
+import { useEffect } from 'react';
 
 /*Zone needs:
     -zone, to know in which map we are
@@ -11,6 +12,9 @@ import Notes from './Notes';
     -noteClick, event function for the Notes component
     -setWhichState, to know which state to modify */
 function Zone({zone, mapGrid, cellClick, noteClick, setWhichState}) {
+    useEffect(() => {
+        localStorage.setItem(zone.zoneName, JSON.stringify(zone));
+    });
     return(
         <div>
             <h1>{zone.zoneName}</h1>
