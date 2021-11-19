@@ -1,9 +1,8 @@
 import './App.css';
 import Zone from './comps/Zone';
-//import Roots from './comps/maps/Roots';
-//import Annfwn from './comps/maps/Annfwn';
 import {useState, useReducer, useEffect} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
+import logo from './comps/logo.png';
 
 function App() {
 
@@ -86,17 +85,112 @@ function App() {
     mapGrid: [4, 7],
     notesContent: [],
   });
+  const [hallMalice, setHallMalice] = useLegacyState(JSON.parse(localStorage.getItem('Hall of Malice')) || {
+    zoneName: 'Hall of Malice',
+    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapGrid: [7, 5],
+    notesContent: [],
+  });
+  const [prisonGloom, setPrisonGloom] = useLegacyState(JSON.parse(localStorage.getItem('Eternal Prison - Gloom')) || {
+    zoneName: 'Eternal Prison - Gloom',
+    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapGrid: [7, 7],
+    notesContent: [],
+  });
+  const [prisonDoom, setPrisonDoom] = useLegacyState(JSON.parse(localStorage.getItem('Eternal Prison - Doom')) || {
+    zoneName: 'Eternal Prison - Doom',
+    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapGrid: [5, 7],
+    notesContent: [],
+  });
+  const [nibiru, setNibiru] = useLegacyState(JSON.parse(localStorage.getItem('Nibiru')) || {
+    zoneName: 'Nibiru',
+    mapContent: ['', '', '', '', '', '', ''],
+    mapGrid: [3, 3],
+    notesContent: [],
+  });
 
-  //Check size of localStorage
-  //var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+  //State of the notes inputs, to have only one open
+  const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
+  //State of which Zones should be rendered based on the ones the user wants/knows
+  const [userZones, setUserZones] = useState([0, 1, 5]);
+
+  //////////////////////////////END OF STATES//////////////////////////////
+
+
+  //////////////////////////////FUNCTIONS ZONE//////////////////////////////
+  //Horrible switch function to know which zones to render based on an array of numbers, could have made it dynamic but all I
+  //thought was making an array of objects with the info needed to dynamically create each Zone, but then each object was like 
+  //3-5 lines per zone so nothing really changed, and this is easy enough to read
+  function whichZonesRender(number) {
+    let result;
+    switch (number) {
+      case 0: 
+        result = <Zone key='0' zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setRoots}/>;
+        break;
+      case 1: 
+        result = <Zone key='1' zone={annfwn} mapGrid={mapsGrid.annfwnGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAnnfwn}/>;
+        break;
+      case 2: 
+        result = <Zone key='2' zone={immortal} mapGrid={mapsGrid.immortalGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setImmortal}/>;
+        break;
+      case 3:
+        result = <Zone key='3' zone={icefire} mapGrid={mapsGrid.icefireGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setIcefire}/>;
+        break;
+      case 4:
+        result = <Zone key='4' zone={divine} mapGrid={mapsGrid.divineGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setDivine}/>;
+        break;
+      case 5:
+        result = <Zone key='5' zone={shrineFrost} mapGrid={mapsGrid.shrineFrostGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setShrineFrost}/>;
+        break;
+      case 6:
+        result = <Zone key='6' zone={gateDead} mapGrid={mapsGrid.gateDeadGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setGateDead}/>;
+        break;
+      case 7:
+        result = <Zone key='7' zone={takamagahara} mapGrid={mapsGrid.takamagaharaGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setTakamagahara}/>;
+        break;
+      case 8:
+        result = <Zone key='8' zone={heavensLab} mapGrid={mapsGrid.heavensLabGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setHeavensLab}/>;
+        break;
+      case 9:
+        result = <Zone key='9' zone={valhalla} mapGrid={mapsGrid.valhallaGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setValhalla}/>;
+        break;
+      case 10:
+        result = <Zone key='10' zone={darkLord} mapGrid={mapsGrid.darkLordGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setDarkLord}/>;
+        break;
+      case 11:
+        result = <Zone key='11' zone={ancientChaos} mapGrid={mapsGrid.ancientChaosGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAncientChaos}/>;
+        break;
+      case 12:
+        result = <Zone key='12' zone={hallMalice} mapGrid={mapsGrid.hallMaliceGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setHallMalice}/>;
+        break;
+      case 13:
+        result = <Zone key='13' zone={prisonGloom} mapGrid={mapsGrid.prisonGloomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonGloom}/>;
+        break;
+      case 14:
+        result = <Zone key='14' zone={prisonDoom} mapGrid={mapsGrid.prisonDoomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonDoom}/>;
+        break;
+      case 15:
+        result = <Zone zone={nibiru} mapGrid={mapsGrid.nibiruGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setNibiru}/>;
+        break;
+      default: 
+        result = <h1>Whoops!</h1>;
+        break;
+    }
+    return result;
+  }
+
+
+
+  //Check size of localStorage on render
+  // var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
   //Check localStorage on every render
   /*useEffect(() => {
     console.log(localStorage);
   })*/
 
-  //State of the notes inputs, to have only one open
-  const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
+
 
   //Map functions
   //Change the value of the maps cells on click, from 1 to 15, back to empty
@@ -146,9 +240,19 @@ function App() {
   }
 
   return (
-    <div>
-      Header here maybe
-      <Zone zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setRoots}/>
+    <div id='mainApp'>
+      <div id='header'>
+        <img src={logo}/>
+        <h2>An easy way to take notes while playing the game</h2>
+      </div>
+      {userZones.map(elem => whichZonesRender(elem))}
+    </div>
+  );
+};
+
+export default App;
+
+/*<Zone zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setRoots}/>
       <Zone zone={annfwn} mapGrid={mapsGrid.annfwnGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAnnfwn}/>
       <Zone zone={immortal} mapGrid={mapsGrid.immortalGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setImmortal}/>
       <Zone zone={icefire} mapGrid={mapsGrid.icefireGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setIcefire}/>
@@ -160,9 +264,7 @@ function App() {
       <Zone zone={valhalla} mapGrid={mapsGrid.valhallaGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setValhalla}/>
       <Zone zone={darkLord} mapGrid={mapsGrid.darkLordGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setDarkLord}/>
       <Zone zone={ancientChaos} mapGrid={mapsGrid.ancientChaosGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAncientChaos}/>
-    </div>
-  );
-};
-
-export default App;
-
+      <Zone zone={hallMalice} mapGrid={mapsGrid.hallMaliceGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setHallMalice}/>
+      <Zone zone={prisonGloom} mapGrid={mapsGrid.prisonGloomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonGloom}/>
+      <Zone zone={prisonDoom} mapGrid={mapsGrid.prisonDoomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonDoom}/>
+      <Zone zone={nibiru} mapGrid={mapsGrid.nibiruGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setNibiru}/>*/

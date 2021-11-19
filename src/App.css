@@ -1,0 +1,14 @@
+#mainApp {
+    min-width: 200px;
+}
+
+#header {
+    background-color: indianred;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#header img {
+    width: 300px;
+}
