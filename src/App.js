@@ -3,6 +3,8 @@ import Zone from './comps/Zone';
 import {useState, useReducer, useEffect} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
 import logo from './comps/logo.png';
+import hideButton from './comps/hide.png';
+import showButton from './comps/show.png';
 
 function App() {
 
@@ -181,15 +183,12 @@ function App() {
     return result;
   }
 
-
-
   //Check size of localStorage on render
   // var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
   //Check localStorage on every render
   /*useEffect(() => {
     console.log(localStorage);
   })*/
-
 
 
   //Map functions
@@ -239,32 +238,45 @@ function App() {
     }
   }
 
+  //Sidebar state
+  const [sidebarShowing, setSidebarShowing] = useState(true);
+
+  //Show-hide the sidebar on click with conditional rendering
+  function showHide(e) {
+    if(sidebarShowing) {
+      e.target.src = showButton;
+      setSidebarShowing(false);
+    } else {
+      e.target.src = hideButton;
+      setSidebarShowing(true);
+    }
+  }
+
   return (
     <div id='mainApp'>
       <div id='header'>
         <img src={logo}/>
         <h2>An easy way to take notes while playing the game</h2>
       </div>
-      {userZones.map(elem => whichZonesRender(elem))}
+      <div id='sidebarAndZones'>
+        {sidebarShowing && <Sidebar />}
+        <div id='zones'>
+          <div> <img src={hideButton} onClick={showHide} /> </div>
+          {userZones.map(elem => whichZonesRender(elem))}
+        </div>
+      </div> 
     </div>
   );
 };
 
-export default App;
+function Sidebar() {
+  return(
+    <div id='sidebar'>
+      <h3>Maps list</h3>
+      <p>Roots</p>
+      <p>Annfwn</p>
+    </div>
+  )
+};
 
-/*<Zone zone={roots} mapGrid={mapsGrid.rootsGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setRoots}/>
-      <Zone zone={annfwn} mapGrid={mapsGrid.annfwnGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAnnfwn}/>
-      <Zone zone={immortal} mapGrid={mapsGrid.immortalGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setImmortal}/>
-      <Zone zone={icefire} mapGrid={mapsGrid.icefireGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setIcefire}/>
-      <Zone zone={divine} mapGrid={mapsGrid.divineGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setDivine}/>
-      <Zone zone={shrineFrost} mapGrid={mapsGrid.shrineFrostGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setShrineFrost}/>
-      <Zone zone={gateDead} mapGrid={mapsGrid.gateDeadGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setGateDead}/>
-      <Zone zone={takamagahara} mapGrid={mapsGrid.takamagaharaGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setTakamagahara}/>
-      <Zone zone={heavensLab} mapGrid={mapsGrid.heavensLabGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setHeavensLab}/>
-      <Zone zone={valhalla} mapGrid={mapsGrid.valhallaGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setValhalla}/>
-      <Zone zone={darkLord} mapGrid={mapsGrid.darkLordGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setDarkLord}/>
-      <Zone zone={ancientChaos} mapGrid={mapsGrid.ancientChaosGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setAncientChaos}/>
-      <Zone zone={hallMalice} mapGrid={mapsGrid.hallMaliceGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setHallMalice}/>
-      <Zone zone={prisonGloom} mapGrid={mapsGrid.prisonGloomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonGloom}/>
-      <Zone zone={prisonDoom} mapGrid={mapsGrid.prisonDoomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonDoom}/>
-      <Zone zone={nibiru} mapGrid={mapsGrid.nibiruGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setNibiru}/>*/
+export default App;
