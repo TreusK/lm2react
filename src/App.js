@@ -6,6 +6,7 @@ import logo from './comps/logo.png';
 import hideButton from './comps/hide.png';
 import showButton from './comps/show.png';
 
+
 function App() {
 
   //Legacy state
@@ -116,7 +117,11 @@ function App() {
   const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
   //State of which Zones should be rendered based on the ones the user wants/knows
-  const [userZones, setUserZones] = useState([0, 1, 5]);
+  const [userZones, setUserZones] = useState([0, 1, 3, 15]);
+
+  //Sidebar showing/hidden state 
+  const [sidebarShowing, setSidebarShowing] = useState(true);
+
 
   //////////////////////////////END OF STATES//////////////////////////////
 
@@ -174,7 +179,7 @@ function App() {
         result = <Zone key='14' zone={prisonDoom} mapGrid={mapsGrid.prisonDoomGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setPrisonDoom}/>;
         break;
       case 15:
-        result = <Zone zone={nibiru} mapGrid={mapsGrid.nibiruGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setNibiru}/>;
+        result = <Zone key='15' zone={nibiru} mapGrid={mapsGrid.nibiruGrid} cellClick={handleClickOnCell} noteClick={handleChangeNote} setWhichState={setNibiru}/>;
         break;
       default: 
         result = <h1>Whoops!</h1>;
@@ -238,9 +243,8 @@ function App() {
     }
   }
 
-  //Sidebar state
-  const [sidebarShowing, setSidebarShowing] = useState(true);
 
+  //Sidebar functions
   //Show-hide the sidebar on click with conditional rendering
   function showHide(e) {
     if(sidebarShowing) {
@@ -259,7 +263,7 @@ function App() {
         <h2>An easy way to take notes while playing the game</h2>
       </div>
       <div id='sidebarAndZones'>
-        {sidebarShowing && <Sidebar />}
+        {sidebarShowing && <Sidebar userZones={userZones} setUserZones={setUserZones}/>}
         <div id='zones'>
           <div> <img src={hideButton} onClick={showHide} /> </div>
           {userZones.map(elem => whichZonesRender(elem))}
@@ -269,12 +273,42 @@ function App() {
   );
 };
 
-function Sidebar() {
+
+
+/////////////Sidebar component
+function Sidebar({userZones, setUserZones}) {
+  //Sidebar event function to choose which zones to render
+  function handleSidebarMapClick(e) {
+    let number = +e.target.classList[0];
+    let tempArray = [];
+    if(userZones.includes(number)) {
+      tempArray = userZones.filter(elem => elem !== number);
+      setUserZones(tempArray);
+    } else {
+      tempArray = userZones.concat([number]);
+      setUserZones(tempArray);
+    }
+  };
+
   return(
     <div id='sidebar'>
       <h3>Maps list</h3>
-      <p>Roots</p>
-      <p>Annfwn</p>
+      <p className={`0 mapSelectorSidebar ${userZones.includes(0) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Roots of Yggdrasil</p>
+      <p className={`1 mapSelectorSidebar ${userZones.includes(1) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Annwfn</p>
+      <p className={`2 mapSelectorSidebar ${userZones.includes(2) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Immortal Battlefield</p>
+      <p className={`3 mapSelectorSidebar ${userZones.includes(3) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Icefire Treetop</p>
+      <p className={`4 mapSelectorSidebar ${userZones.includes(4) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Divine Fortress</p>
+      <p className={`5 mapSelectorSidebar ${userZones.includes(5) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Shrine of the Frost Giants</p>
+      <p className={`6 mapSelectorSidebar ${userZones.includes(6) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Gate of the Dead</p>
+      <p className={`7 mapSelectorSidebar ${userZones.includes(7) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Takamagahara Shrine</p>
+      <p className={`8 mapSelectorSidebar ${userZones.includes(8) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Heaven’s Labyrinth</p>
+      <p className={`9 mapSelectorSidebar ${userZones.includes(9) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Valhalla</p>
+      <p className={`10 mapSelectorSidebar ${userZones.includes(10) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Dark Lord’s Mausoleum</p>
+      <p className={`11 mapSelectorSidebar ${userZones.includes(11) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Ancient Chaos</p>
+      <p className={`12 mapSelectorSidebar ${userZones.includes(12) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Hall of Malice </p>
+      <p className={`13 mapSelectorSidebar ${userZones.includes(13) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Eternal Prison – Gloom</p>
+      <p className={`14 mapSelectorSidebar ${userZones.includes(14) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Eternal Prison – Doom</p>
+      <p className={`15 mapSelectorSidebar ${userZones.includes(15) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Nibiru</p>
     </div>
   )
 };

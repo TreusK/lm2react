@@ -24,8 +24,28 @@ body {
     flex-direction: column;
     min-width: 250px; 
     background-color: gray;
+    margin-right: 20px;
 }
 
 #sidebarAndZones {
     display: flex;
+}
+
+.mapSelectorSidebar {
+    margin: 0;
+    height: 40px;
+    border-bottom: solid 1px black;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    border-collapse: collapse;
+    user-select: none;
+}
+
+.mapSelectorSidebar:hover {
+    background-color: rgb(196, 195, 195);
+}
+
+.activated {
+    background-color: ghostwhite;
 }
