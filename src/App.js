@@ -1,6 +1,6 @@
 import './App.css';
 import Zone from './comps/Zone';
-import {useState, useReducer, useEffect} from 'react';
+import {useState, useReducer} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
 import logo from './comps/logo.png';
 import hideButton from './comps/hide.png';
@@ -117,7 +117,7 @@ function App() {
   const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
   //State of which Zones should be rendered based on the ones the user wants/knows
-  const [userZones, setUserZones] = useState([0, 1, 3, 15]);
+  const [userZones, setUserZones] = useState([0]);
 
   //Sidebar showing/hidden state 
   const [sidebarShowing, setSidebarShowing] = useState(true);
@@ -259,16 +259,17 @@ function App() {
   return (
     <div id='mainApp'>
       <div id='header'>
-        <img src={logo}/>
+        <img alt='LaMulana2Logo' src={logo}/>
         <h2>An easy way to take notes while playing the game</h2>
       </div>
       <div id='sidebarAndZones'>
         {sidebarShowing && <Sidebar userZones={userZones} setUserZones={setUserZones}/>}
         <div id='zones'>
-          <div> <img src={hideButton} onClick={showHide} /> </div>
+          <div> <img alt='showOrHideButton' src={hideButton} onClick={showHide} /> </div>
           {userZones.map(elem => whichZonesRender(elem))}
         </div>
       </div> 
+      <Footer />
     </div>
   );
 };
@@ -312,5 +313,18 @@ function Sidebar({userZones, setUserZones}) {
     </div>
   )
 };
+
+/////////////Footer component
+function Footer() {
+  function clickToLog(e) {
+    console.log(typeof(localStorage));
+  }
+
+  return(
+    <div>
+      <div onClick={clickToLog}>Click me to copy local storage to clipboard</div>
+    </div>
+  )
+}
 
 export default App;
