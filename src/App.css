@@ -49,3 +49,21 @@ body {
 .activated {
     background-color: ghostwhite;
 }
+
+.exp-imp-Btn {
+    height: 30px;
+    width: 100px;
+    background-color: greenyellow;
+    border: solid 2px black;
+    border-radius: 10px;
+    user-select: none;
+    text-align: center;
+}
+
+#expImpContainer {
+    display: flex;
+}
+
+#inputTag {
+    display: none;
+}

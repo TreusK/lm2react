@@ -1,6 +1,6 @@
 import './App.css';
 import Zone from './comps/Zone';
-import {useState, useReducer} from 'react';
+import {useState, useReducer, useRef} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
 import logo from './comps/logo.png';
 import hideButton from './comps/hide.png';
@@ -15,6 +15,9 @@ function App() {
     initialState,
   );
 
+  const namesOfZones = ['Roots of Yggdrasil', 'Annfwn', 'Immortal Battlefield', 'Icefire Treetop', 'Divine Fortress', 'Shrine of the Frost Giants',
+  'Gate of the Dead', 'Takagamahara Shrine', "Heaven's Labyrinth", 'Valhalla', "Dark Lord's Mausoleum", 'Ancient Chaos', 'Hall of Malice',
+  'Eternal Prison - Gloom', 'Eternal Prison - Doom', 'Nibiru'];
   //States of all maps
   const [roots, setRoots] = useLegacyState(JSON.parse(localStorage.getItem('Roots of Yggdrasil')) || {
     zoneName: 'Roots of Yggdrasil',
@@ -121,6 +124,9 @@ function App() {
 
   //Sidebar showing/hidden state 
   const [sidebarShowing, setSidebarShowing] = useState(true);
+
+  //State for imported files
+  const [imported, setImported] = useState({});
 
 
   //////////////////////////////END OF STATES//////////////////////////////
@@ -243,7 +249,6 @@ function App() {
     }
   }
 
-
   //Sidebar functions
   //Show-hide the sidebar on click with conditional rendering
   function showHide(e) {
@@ -269,14 +274,17 @@ function App() {
           {userZones.map(elem => whichZonesRender(elem))}
         </div>
       </div> 
-      <Footer />
+      <Footer arrOfSets={[setRoots, setAnnfwn, setImmortal, setIcefire, setDivine, setShrineFrost, 
+          setGateDead, setTakamagahara, setHeavensLab, setValhalla, setDarkLord, setAncientChaos, setHallMalice,
+          setPrisonGloom, setPrisonDoom, setNibiru]}
+              namesOfZones={namesOfZones}/>
     </div>
   );
 };
 
 
 
-/////////////Sidebar component
+//////////////////////////Sidebar component//////////////////////////
 function Sidebar({userZones, setUserZones}) {
   //Sidebar event function to choose which zones to render
   function handleSidebarMapClick(e) {
@@ -314,15 +322,68 @@ function Sidebar({userZones, setUserZones}) {
   )
 };
 
-/////////////Footer component
-function Footer() {
-  function clickToLog(e) {
-    console.log(typeof(localStorage));
+//////////////////////////Footer component//////////////////////////
+function Footer({arrOfSets, namesOfZones}) {
+  const elemRef = useRef();
+
+
+  function exportData(e) {
+    saveTemplateAsFile('LM2data.json', localStorage);
   }
+
+  //Function to upload a json file/IMPORT
+  function importData(e) {
+    let inp = elemRef.current;
+    inp.click();
+  }
+
+  //Function event for onChange input file
+  function loadImportedData(e) {
+    let tempFile = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.readAsText(tempFile);
+    reader.onload = function() {
+      let resultObj = JSON.parse(reader.result);
+      /*for(let i=0; i<16; i++) {
+        arrOfSets[i](JSON.parse(resultObj[namesOfZones[i]]));
+      }*/
+      console.log(resultObj);
+    };
+    reader.onerror = function() {
+      console.log(reader.error);
+    }
+  }
+
+  //Function to be able to download a local file/EXPORT
+  function saveTemplateAsFile(filename, dataObjToWrite) {
+    const blob = new Blob([JSON.stringify(dataObjToWrite)], { type: "text/json" });
+    const link = document.createElement("a");
+
+    link.download = filename;
+    link.href = window.URL.createObjectURL(blob);
+    link.dataset.downloadurl = ["text/json", link.download, link.href].join(":");
+
+    const evt = new MouseEvent("click", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+    });
+
+    link.dispatchEvent(evt);
+    link.remove()
+  };
 
   return(
     <div>
-      <div onClick={clickToLog}>Click me to copy local storage to clipboard</div>
+      <div>
+        <p>The data is saved in localStorage, but if you wrote a bunch and want a backup just in case, click the Export button</p>
+      </div>
+      <div id='expImpContainer'>
+      <input type='file' id='inputTag' ref={elemRef} onChange={loadImportedData}/>
+        <div className='exp-imp-Btn' onClick={exportData}>Export</div>
+        <div className='exp-imp-Btn' onClick={importData}>Import</div>
+      </div>
     </div>
   )
 }
