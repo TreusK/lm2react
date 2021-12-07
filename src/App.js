@@ -125,9 +125,6 @@ function App() {
   //Sidebar showing/hidden state 
   const [sidebarShowing, setSidebarShowing] = useState(true);
 
-  //State for imported files
-  const [imported, setImported] = useState({});
-
 
   //////////////////////////////END OF STATES//////////////////////////////
 
@@ -272,6 +269,7 @@ function App() {
         <div id='zones'>
           <div> <img alt='showOrHideButton' src={hideButton} onClick={showHide} /> </div>
           {userZones.map(elem => whichZonesRender(elem))}
+          {(userZones.length == 0) ? <h2 id='nothingRenderedH2'>Choose some maps to render from the sidebar</h2> : <></>}
         </div>
       </div> 
       <Footer arrOfSets={[setRoots, setAnnfwn, setImmortal, setIcefire, setDivine, setShrineFrost, 
@@ -345,9 +343,11 @@ function Footer({arrOfSets, namesOfZones}) {
     reader.readAsText(tempFile);
     reader.onload = function() {
       let resultObj = JSON.parse(reader.result);
-      /*for(let i=0; i<16; i++) {
-        arrOfSets[i](JSON.parse(resultObj[namesOfZones[i]]));
-      }*/
+      for(let i=0; i<16; i++) {
+        if(resultObj.hasOwnProperty([namesOfZones[i]])) {
+          arrOfSets[i](JSON.parse(resultObj[namesOfZones[i]]));
+        };
+      };
       console.log(resultObj);
     };
     reader.onerror = function() {

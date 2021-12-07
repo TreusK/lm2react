@@ -24,7 +24,7 @@ body {
     flex-direction: column;
     min-width: 250px; 
     background-color: gray;
-    margin-right: 20px;
+    margin-right: 5px;
 }
 
 #sidebarAndZones {
@@ -44,6 +44,7 @@ body {
 
 .mapSelectorSidebar:hover {
     background-color: rgb(196, 195, 195);
+    font-weight: 700;
 }
 
 .activated {
@@ -66,4 +67,12 @@ body {
 
 #inputTag {
     display: none;
+}
+
+#zones {
+    margin-left: 10px;
+}
+
+#nothingRenderedH2 {
+    height: 80vh;
 }
