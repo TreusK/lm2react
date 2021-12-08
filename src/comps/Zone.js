@@ -16,7 +16,7 @@ function Zone({zone, mapGrid, cellClick, noteClick, setWhichState}) {
         localStorage.setItem(zone.zoneName, JSON.stringify(zone));
     });
     return(
-        <div>
+        <div className='zoneCard'>
             <h1>{zone.zoneName}</h1>
             <Map zone={zone} mapGrid={mapGrid} cellClick={cellClick} setWhichState={setWhichState}/>
             <Notes zone={zone} setWhichState={setWhichState} noteClick={noteClick}/>

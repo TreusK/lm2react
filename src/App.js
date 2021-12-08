@@ -1,4 +1,5 @@
-import './App.css';
+//import './App.css';
+import './skeleton.css';
 import Zone from './comps/Zone';
 import {useState, useReducer, useRef} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
@@ -259,17 +260,17 @@ function App() {
   }
 
   return (
-    <div id='mainApp'>
-      <div id='header'>
-        <img alt='LaMulana2Logo' src={logo}/>
-        <h2>An easy way to take notes while playing the game</h2>
+    <div id='mainApp' className='container'>
+      <div id='header' className='row'>
+          <img alt='LaMulana2Logo' src={logo}/>
+          <h2>An easy way to take notes while playing the game</h2>
       </div>
-      <div id='sidebarAndZones'>
+      <div id='sidebarAndZones' className='row'>
         {sidebarShowing && <Sidebar userZones={userZones} setUserZones={setUserZones}/>}
-        <div id='zones'>
+        <div id='zones' className='nine columns'>
           <div> <img alt='showOrHideButton' src={hideButton} onClick={showHide} /> </div>
           {userZones.map(elem => whichZonesRender(elem))}
-          {(userZones.length == 0) ? <h2 id='nothingRenderedH2'>Choose some maps to render from the sidebar</h2> : <></>}
+          {(userZones.length === 0) ? <h2 id='nothingRenderedH2'>Choose some maps to render from the sidebar</h2> : <></>}
         </div>
       </div> 
       <Footer arrOfSets={[setRoots, setAnnfwn, setImmortal, setIcefire, setDivine, setShrineFrost, 
@@ -298,7 +299,7 @@ function Sidebar({userZones, setUserZones}) {
   };
 
   return(
-    <div id='sidebar'>
+    <div id='sidebar' className='three columns'>
       <h3>Maps list</h3>
       <p className={`0 mapSelectorSidebar ${userZones.includes(0) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Roots of Yggdrasil</p>
       <p className={`1 mapSelectorSidebar ${userZones.includes(1) ? 'activated' : ''}`} onClick={handleSidebarMapClick}>Annwfn</p>
@@ -381,8 +382,8 @@ function Footer({arrOfSets, namesOfZones}) {
       </div>
       <div id='expImpContainer'>
       <input type='file' id='inputTag' ref={elemRef} onChange={loadImportedData}/>
-        <div className='exp-imp-Btn' onClick={exportData}>Export</div>
-        <div className='exp-imp-Btn' onClick={importData}>Import</div>
+        <div className='exp-imp-Btn button' onClick={exportData}>Export</div>
+        <div className='exp-imp-Btn button' onClick={importData}>Import</div>
       </div>
     </div>
   )
