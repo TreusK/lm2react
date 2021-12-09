@@ -12,7 +12,7 @@ function Notes({zone, setWhichState, noteClick}) {
     }
 
     return (
-        <div>
+        <div className='notes'>
             <ul>
                 {zone.notesContent.map((note, index) => <li onClick={(e) => noteClick(e, setWhichState, zone)} className={index}>{note}</li>)}
             </ul>

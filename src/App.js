@@ -1,11 +1,10 @@
-//import './App.css';
 import './skeleton.css';
 import Zone from './comps/Zone';
 import {useState, useReducer, useRef} from 'react';
 import mapsGrid from './comps/maps/mapsGrid';
-import logo from './comps/logo.png';
-import hideButton from './comps/hide.png';
-import showButton from './comps/show.png';
+import logo from './comps/img/logo.png';
+import hideButton from './comps/img/hide.png';
+import showButton from './comps/img/show.png';
 
 
 function App() {
@@ -261,10 +260,12 @@ function App() {
 
   return (
     <div id='mainApp' className='container'>
+
       <div id='header' className='row'>
           <img alt='LaMulana2Logo' src={logo}/>
           <h2>An easy way to take notes while playing the game</h2>
       </div>
+
       <div id='sidebarAndZones' className='row'>
         {sidebarShowing && <Sidebar userZones={userZones} setUserZones={setUserZones}/>}
         <div id='zones' className='nine columns'>
@@ -272,11 +273,13 @@ function App() {
           {userZones.map(elem => whichZonesRender(elem))}
           {(userZones.length === 0) ? <h2 id='nothingRenderedH2'>Choose some maps to render from the sidebar</h2> : <></>}
         </div>
+
       </div> 
       <Footer arrOfSets={[setRoots, setAnnfwn, setImmortal, setIcefire, setDivine, setShrineFrost, 
           setGateDead, setTakamagahara, setHeavensLab, setValhalla, setDarkLord, setAncientChaos, setHallMalice,
           setPrisonGloom, setPrisonDoom, setNibiru]}
               namesOfZones={namesOfZones}/>
+
     </div>
   );
 };
@@ -376,15 +379,18 @@ function Footer({arrOfSets, namesOfZones}) {
   };
 
   return(
-    <div>
-      <div>
+    <div id='footer' className='container'>
+
+      <div className='row exp-imp-explanation'>
         <p>The data is saved in localStorage, but if you wrote a bunch and want a backup just in case, click the Export button</p>
       </div>
-      <div id='expImpContainer'>
-      <input type='file' id='inputTag' ref={elemRef} onChange={loadImportedData}/>
+
+      <div id='expImpContainer' className='row'>
+        <input type='file' id='inputTag' ref={elemRef} onChange={loadImportedData}/>
         <div className='exp-imp-Btn button' onClick={exportData}>Export</div>
         <div className='exp-imp-Btn button' onClick={importData}>Import</div>
       </div>
+
     </div>
   )
 }

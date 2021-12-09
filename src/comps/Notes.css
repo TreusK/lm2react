@@ -9,10 +9,3 @@ input {
     width: 100%;
     height: 100%;
 }
-
-.plus {
-    border: solid 2px black;
-    width: 20px;
-    text-align: center;
-    border-radius: 5px;
-}

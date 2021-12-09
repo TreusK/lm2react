@@ -405,7 +405,8 @@ there.
 @media (min-width: 400px) {}
 
 /* Larger than phablet (also point when grid becomes active) */
-@media (min-width: 550px) {}
+@media (min-width: 550px) {
+}
 
 /* Larger than tablet */
 @media (min-width: 750px) {}
@@ -421,9 +422,11 @@ there.
 /*//////////////////////////// MY css //////////////////////////////*/
 
 body {
+  min-width: 450px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background: #E7E9E9;
 }
 
 #inputTag {
@@ -431,11 +434,15 @@ body {
 }
 
 #header {
+  color: #E7E9E9;
   display: flex;
   flex-direction: column;
   background: #B06D70;
   align-items: center;
   font-family: 'Outfit';
+  background-image: url('./comps/img/bg2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #sidebarAndZones {
@@ -448,6 +455,33 @@ body {
 
 #zones {
   margin-left: 10px;
+}
+
+#footer {
+  background-color: #947F70;
+}
+
+#footer .exp-imp-Btn {
+  background-color: honeydew;
+  margin-left: 10px;
+}
+
+#footer p {
+  margin-bottom: 10px;
+}
+
+#footer .exp-imp-explanation {
+  display: flex;
+  justify-content: center;
+}
+
+#expImpContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#nothingRenderedH2 {
+  height: 80vh;
 }
 
 
@@ -476,4 +510,26 @@ body {
   border-bottom: solid 2px black;
   margin: 40px 0;
   padding: 0 0 50px 50px;
+}
+
+.notes {
+  margin-top: 20px;
+}
+
+.plus {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  border: solid 2px black;
+  border-radius: 3px;
+}
+
+@media (max-width: 550px) {
+  .zoneCard {
+    padding-left: 0;
+  }
 }
