@@ -3,3 +3,6 @@ I was playing La Mulana 2, and taking notes in an html file, so I thought "why n
 I hereby present you, a decent way of taking notes while playing La Mulana 2
 
 https://treusk.github.io/lm2react/
+
+Copyright stuff:
+I am not part of Nigoro, also the logo and the background images aren't mine.
