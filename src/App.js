@@ -224,14 +224,16 @@ function App() {
       let listItem = e.target;
       let inputChild = document.createElement('input');
       inputChild.value = listItem.textContent;
-      inputChild.onkeydown = (e) => changeAndCloseInput(e, whichSetZone, whichZone);
+      inputChild.addEventListener('keydown', (e) => changeAndCloseInput(e, whichSetZone, whichZone));
+      inputChild.addEventListener('focusout', (e) => changeAndCloseInput(e, whichSetZone, whichZone));
       listItem.append(inputChild);
+      inputChild.focus();
     }
   }
 
   //Event for the input that appears when editing a note
   function changeAndCloseInput(e, whichSetZone, whichZone) {
-    if(e.key === 'Enter') {
+    if(e.key === 'Enter' || e.key === undefined) {
       let notesContentCopy = [...whichZone.notesContent];
       let whichIndex = +e.target.parentElement.classList[0];
       let newString = e.target.value;
