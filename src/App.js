@@ -352,7 +352,6 @@ function Footer({arrOfSets, namesOfZones}) {
           arrOfSets[i](JSON.parse(resultObj[namesOfZones[i]]));
         };
       };
-      console.log(resultObj);
     };
     reader.onerror = function() {
       console.log(reader.error);
