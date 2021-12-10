@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/lm2react/static/css/main.06101dcb.chunk.css",
+    "main.js": "/lm2react/static/js/main.3a3d10f1.chunk.js",
+    "main.js.map": "/lm2react/static/js/main.3a3d10f1.chunk.js.map",
+    "runtime-main.js": "/lm2react/static/js/runtime-main.c671b929.js",
+    "runtime-main.js.map": "/lm2react/static/js/runtime-main.c671b929.js.map",
+    "static/js/2.e9782f92.chunk.js": "/lm2react/static/js/2.e9782f92.chunk.js",
+    "static/js/2.e9782f92.chunk.js.map": "/lm2react/static/js/2.e9782f92.chunk.js.map",
+    "index.html": "/lm2react/index.html",
+    "static/css/main.06101dcb.chunk.css.map": "/lm2react/static/css/main.06101dcb.chunk.css.map",
+    "static/js/2.e9782f92.chunk.js.LICENSE.txt": "/lm2react/static/js/2.e9782f92.chunk.js.LICENSE.txt",
+    "static/media/skeleton.css": "/lm2react/static/media/bg2.93ab0fef.jpg",
+    "static/media/logo.9a422912.png": "/lm2react/static/media/logo.9a422912.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c671b929.js",
+    "static/js/2.e9782f92.chunk.js",
+    "static/css/main.06101dcb.chunk.css",
+    "static/js/main.3a3d10f1.chunk.js"
+  ]
+}
