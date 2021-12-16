@@ -1,8 +1,17 @@
 .Drag {
+    margin: 10px 20px;
     display: flex;
-
 }
 
-.Drag div {
+.dragIcon {
     border: solid 2px black;
+    width: 30px;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset {
+    background-color: grey;
 }

@@ -1,4 +1,6 @@
 import './Map.css';
+import chest from './img/minichest.png';
+import grail from './img/minigrail.png';
 
 /*Map needs 
     -zone, the state of each zone
@@ -33,6 +35,20 @@ function Map({zone, mapGrid, cellClick, setWhichState}) {
         setWhichState({mapContent: newMapContent});
     }
 
+    //function to change image on cell based on a letter
+    function iconInCell(letter) {
+        let returnValue;
+        switch(letter) {
+            case 'c': returnValue = chest;
+            break;
+            case 'g': returnValue = grail;
+            break;
+            default: returnValue = '';
+            break;
+        }
+        return returnValue;
+    }
+
     return (
         <div style={mapStyle}>
             { mapGrid.map(elem => {
@@ -41,7 +57,9 @@ function Map({zone, mapGrid, cellClick, setWhichState}) {
                     return  <div className={`${counter} mapCell`} onClick={(e) => cellClick(e, setWhichState, zone)} 
                                                                   onDragOver={(e) => dragover(e)}
                                                                   onDrop={(e) => dropped(e, setWhichState, zone)}>
-                                <div className={counter}>{zone.mapContent[counter][0]}</div>
+                                {(zone.mapContent[counter][0] !== '') && <div className={`${counter} aligncenter`}>
+                                     <img className={counter} src={iconInCell(zone.mapContent[counter][0])} alt=''/>
+                                </div>}
                                 <div className={counter}>{zone.mapContent[counter][1]}</div>
                             </div>
                     } else {
