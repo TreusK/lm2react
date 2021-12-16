@@ -18,16 +18,37 @@ function Map({zone, mapGrid, cellClick, setWhichState}) {
         gridTemplateRows: 'repeat(' + rows + ', 30px)',
     }
 
+    //event for dragover
+    function dragover(e) {
+        e.preventDefault();
+    }
+
+    //event for dropped
+    function dropped(e, setWhichState, whichZone) {
+        e.preventDefault();
+        let data = e.dataTransfer.getData("text");
+        let cellIndex = +e.target.classList[0];
+        let newMapContent = [...whichZone.mapContent];
+        newMapContent[cellIndex][0] = data;
+        setWhichState({mapContent: newMapContent});
+    }
+
     return (
         <div style={mapStyle}>
-            {mapGrid.map(elem => {
+            { mapGrid.map(elem => {
                 if (elem === 'm') {
                     counter++;
-                    return <div className={'mapCell ' + counter} onClick={(e) => cellClick(e, setWhichState, zone)}>{zone.mapContent[counter]}</div>
-                } else {
-                    return <div></div>
-                }
-            })}
+                    return  <div className={`${counter} mapCell`} onClick={(e) => cellClick(e, setWhichState, zone)} 
+                                                                  onDragOver={(e) => dragover(e)}
+                                                                  onDrop={(e) => dropped(e, setWhichState, zone)}>
+                                <div className={counter}>{zone.mapContent[counter][0]}</div>
+                                <div className={counter}>{zone.mapContent[counter][1]}</div>
+                            </div>
+                    } else {
+                        return <div></div>
+                    } 
+                }) 
+            }
         </div>
         
     )

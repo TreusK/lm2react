@@ -1,0 +1,8 @@
+.Drag {
+    display: flex;
+
+}
+
+.Drag div {
+    border: solid 2px black;
+}

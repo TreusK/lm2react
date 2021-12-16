@@ -6,7 +6,6 @@ import logo from './comps/img/logo.png';
 import hideButton from './comps/img/hide.png';
 import showButton from './comps/img/show.png';
 
-
 function App() {
 
   //Legacy state
@@ -21,97 +20,97 @@ function App() {
   //States of all maps
   const [roots, setRoots] = useLegacyState(JSON.parse(localStorage.getItem('Roots of Yggdrasil')) || {
     zoneName: 'Roots of Yggdrasil',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [7, 6],
     notesContent: ['Click on the map cells to put a number, up to 15', 'Click me to edit, or click the + button to add new notes'],
   });
   const [annfwn, setAnnfwn] = useLegacyState(JSON.parse(localStorage.getItem('Annfwn')) || {
     zoneName: 'Annfwn',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [7, 5],
     notesContent: [],
   });
   const [immortal, setImmortal] = useLegacyState(JSON.parse(localStorage.getItem('Immortal Battlefield')) || {
     zoneName: 'Immortal Battlefield',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [9, 7],
     notesContent: [],
   });
   const [icefire, setIcefire] = useLegacyState(JSON.parse(localStorage.getItem('Icefire Treetop')) || {
     zoneName: 'Icefire Treetop',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [7, 6],
     notesContent: [],
   });
   const [divine, setDivine] = useLegacyState(JSON.parse(localStorage.getItem('Divine Fortress')) || {
     zoneName: 'Divine Fortress',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [5, 5],
     notesContent: [],
   });
   const [shrineFrost, setShrineFrost] = useLegacyState(JSON.parse(localStorage.getItem('Shrine of the Frost Giants')) || {
     zoneName: 'Shrine of the Frost Giants',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [5, 7],
     notesContent: [],
   });
   const [gateDead, setGateDead] = useLegacyState(JSON.parse(localStorage.getItem('Gate of the Dead')) || {
     zoneName: 'Gate of the Dead',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [6, 7],
     notesContent: [],
   });
   const [takamagahara, setTakamagahara] = useLegacyState(JSON.parse(localStorage.getItem('Takagamahara Shrine')) || {
     zoneName: 'Takagamahara Shrine',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [6, 7],
     notesContent: [],
   });
   const [heavensLab, setHeavensLab] = useLegacyState(JSON.parse(localStorage.getItem("Heaven's Labyrinth")) || {
     zoneName: "Heaven's Labyrinth",
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', '']],
     mapGrid: [5, 5],
     notesContent: [],
   });
   const [valhalla, setValhalla] = useLegacyState(JSON.parse(localStorage.getItem('Valhalla')) || {
     zoneName: 'Valhalla',
-    mapContent: ['', '', '', '', '', '', '', '', '', '','', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', '']],
     mapGrid: [5, 5],
     notesContent: [],
   });
   const [darkLord, setDarkLord] = useLegacyState(JSON.parse(localStorage.getItem("Dark Lord's Mausoleum")) || {
     zoneName: "Dark Lord's Mausoleum",
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', '']],
     mapGrid: [5, 8],
     notesContent: [],
   });
   const [ancientChaos, setAncientChaos] = useLegacyState(JSON.parse(localStorage.getItem('Ancient Chaos')) || {
     zoneName: 'Ancient Chaos',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', '']],
     mapGrid: [4, 7],
     notesContent: [],
   });
   const [hallMalice, setHallMalice] = useLegacyState(JSON.parse(localStorage.getItem('Hall of Malice')) || {
     zoneName: 'Hall of Malice',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', '']],
     mapGrid: [7, 5],
     notesContent: [],
   });
   const [prisonGloom, setPrisonGloom] = useLegacyState(JSON.parse(localStorage.getItem('Eternal Prison - Gloom')) || {
     zoneName: 'Eternal Prison - Gloom',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [7, 7],
     notesContent: [],
   });
   const [prisonDoom, setPrisonDoom] = useLegacyState(JSON.parse(localStorage.getItem('Eternal Prison - Doom')) || {
     zoneName: 'Eternal Prison - Doom',
-    mapContent: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', ''], ['', ''], ['', ''], ['', ''],['', ''], ['', '']],
     mapGrid: [5, 7],
     notesContent: [],
   });
   const [nibiru, setNibiru] = useLegacyState(JSON.parse(localStorage.getItem('Nibiru')) || {
     zoneName: 'Nibiru',
-    mapContent: ['', '', '', '', '', '', ''],
+    mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [3, 3],
     notesContent: [],
   });
@@ -119,7 +118,7 @@ function App() {
   //State of the notes inputs, to have only one open
   const [isAnotherInputOpen, setIsAnotherInputOpen] = useState(false);
 
-  //State of which Zones should be rendered based on the ones the user wants/knows
+  //State of which Zones should be rendered based on the ones the user wants/knows, default is zone 0 aka Yggdrasil
   const [userZones, setUserZones] = useState([0]);
 
   //Sidebar showing/hidden state 
@@ -202,19 +201,19 @@ function App() {
   //Map functions
   //Change the value of the maps cells on click, from 1 to 15, back to empty
   function handleClickOnCell(e, setWhichState, whichZone) {
-    let cellIndex = +e.target.classList[1];
+    let cellIndex = +e.target.classList[0];
     let newMapContent = [...whichZone.mapContent];
-    if(newMapContent[cellIndex] === '') {
-      newMapContent[cellIndex] = '1';
-    } else if(+newMapContent[cellIndex] < 15) {
-      let valueAsInt = +newMapContent[cellIndex];
+    if(newMapContent[cellIndex][1] === '') {
+      newMapContent[cellIndex][1] = '1';
+    } else if(+newMapContent[cellIndex][1] < 15) {
+      let valueAsInt = +newMapContent[cellIndex][1];
       valueAsInt++;
-      newMapContent[cellIndex] = String(valueAsInt);
+      newMapContent[cellIndex][1] = String(valueAsInt);
     } else {
-      newMapContent[cellIndex] = '';
+      newMapContent[cellIndex][1] = '';
     }
     setWhichState({mapContent: newMapContent});
-  }
+}
   
   //Notes functions
   //Function to change notes when clicked on them

@@ -3,6 +3,7 @@ import './Zone.css';
 //Components
 import Map from './Map';
 import Notes from './Notes';
+import Drag from './Drag';
 import { useEffect } from 'react';
 
 /*Zone needs:
@@ -19,6 +20,7 @@ function Zone({zone, mapGrid, cellClick, noteClick, setWhichState}) {
         <div className='zoneCard'>
             <h1>{zone.zoneName}</h1>
             <Map zone={zone} mapGrid={mapGrid} cellClick={cellClick} setWhichState={setWhichState}/>
+            <Drag />
             <Notes zone={zone} setWhichState={setWhichState} noteClick={noteClick}/>
         </div>
     )
