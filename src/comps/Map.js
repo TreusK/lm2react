@@ -1,6 +1,7 @@
 import './Map.css';
 import chest from './img/minichest.png';
 import grail from './img/minigrail.png';
+import door from './img/minidoor.png';
 
 /*Map needs 
     -zone, the state of each zone
@@ -42,6 +43,8 @@ function Map({zone, mapGrid, cellClick, setWhichState}) {
             case 'c': returnValue = chest;
             break;
             case 'g': returnValue = grail;
+            break;
+            case 'd': returnValue = door;
             break;
             default: returnValue = '';
             break;

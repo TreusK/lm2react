@@ -22,7 +22,7 @@ function App() {
     zoneName: 'Roots of Yggdrasil',
     mapContent: [['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']],
     mapGrid: [7, 6],
-    notesContent: ['Click on the map cells to put a number, up to 15', 'Click me to edit, or click the + button to add new notes'],
+    notesContent: ['Drag icons to the map to place them', 'Click on the map cells to put a number, up to 15', 'Click me to edit, or click the + button to add new notes'],
   });
   const [annfwn, setAnnfwn] = useLegacyState(JSON.parse(localStorage.getItem('Annfwn')) || {
     zoneName: 'Annfwn',

@@ -4,12 +4,15 @@
 }
 
 .dragIcon {
-    border: solid 2px black;
+    border: solid 1px rgb(54, 39, 39);
+    border-radius: 3px;
     width: 30px;
     user-select: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 5px;
+
 }
 
 .reset {
